@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Form } from 'react-router-dom';
 import FormRowSelect from '../../components/FormRowSelect';
+import { clearValues, handleChange } from '../../features/job/jobSlice';
 
 const AddJob = () => {
   const {
@@ -32,6 +33,7 @@ const AddJob = () => {
   const handleJobInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    dispatch(handleChange({ name, value }));
   };
 
   return (
@@ -75,7 +77,7 @@ const AddJob = () => {
             <button
               type='button'
               className='btn btn-block clear-btn'
-              onClick={() => console.log('clear')}
+              onClick={() => dispatch(clearValues())}
             >
               clear
             </button>
