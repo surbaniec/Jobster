@@ -9,6 +9,7 @@ import {
   handleChange,
   createJob,
 } from '../../features/job/jobSlice';
+import { useEffect } from 'react';
 
 const AddJob = () => {
   const {
@@ -23,7 +24,16 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useSelector((store) => store.job);
+  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isEditing) {
+      dispatch(handleChange({ name: 'jobLocation', value: user.location }));
+    }
+
+    //eslint-disable-next-line
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
