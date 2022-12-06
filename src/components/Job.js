@@ -4,6 +4,7 @@ import Wrapper from '../assets/wrappers/Job';
 import { useDispatch } from 'react-redux';
 import JobInfo from './JobInfo';
 import moment from 'moment';
+import { deleteJob } from '../features/job/jobSlice';
 
 function Job({
   _id,
@@ -33,7 +34,7 @@ function Job({
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${status}`}>{status}</div>
         </div>
-        <div className='footer'>
+        <footer>
           <div className='actions'>
             <Link
               to='/add-job'
@@ -45,12 +46,12 @@ function Job({
             <button
               type='button'
               className='btn delete-btn'
-              onClick={() => console.log('delete')}
+              onClick={() => dispatch(deleteJob(_id))}
             >
               Delete
             </button>
           </div>
-        </div>
+        </footer>
       </div>
     </Wrapper>
   );
